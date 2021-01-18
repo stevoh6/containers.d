@@ -1,0 +1,19 @@
+version: "2"
+services:
+  icecoder:
+    image: griefed/icecoder:latest
+    container_name: icecoder
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Bratislava # Timezone
+      - PUID=1000 # User ID
+      - PGID=100 # Group ID
+      - GITURL=https://github.com/icecoder/ICEcoder.git # GitHub Repository to clone during container creation
+    volumes:
+      - ./plugins:/plugins # Contains all installed plugins.
+      - ./data:/data # Contains ICEcoder data like backups.
+      - ./config:/config # Contains config files and logs.
+      - /var/containers.d:/code # Contains GITURL repository.
+      # - /var/containers.d:/containers.d
+    ports:
+      - 8080:8080/tcp # WebIDE

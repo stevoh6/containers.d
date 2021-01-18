@@ -12,3 +12,13 @@ services:
     network_mode: host
     ports:
       - "8123:8123"
+  hass-configurator:
+    container_name: hass-configurator
+    image: "causticlab/hass-configurator-docker:x86_64"
+    restart: always
+    ports:
+      - "3218:3218/tcp"
+    network_mode: host
+    volumes:
+      - "./hass-configurator-config:/config"
+      - "./data:/hass-config"

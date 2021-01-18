@@ -1,0 +1,13 @@
+version: "3.6"
+services:
+  node-red:
+    build: .
+    container_name: node-red
+    image: local-custom-node-red
+    volumes:
+      - ./data:/data
+    environment:
+      TZ: Europe/Bratislava
+    restart: always
+    ports:
+      - "1880:1880"
