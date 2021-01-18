@@ -1,0 +1,47 @@
+version: "3"
+# Other docker-compose examples in /examples
+
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: mc-modded-theUltimate
+    ports:
+      - "25566:25565"
+      - "8866:8123"
+    volumes:
+      - "./data:/data"
+    environment:
+      EULA: "TRUE"
+      TYPE: "FTB"
+      FTB_SERVER_MOD: "https://sleepingtea.xyz/serverfiles/Ultimate%20Server%20Files.zip"
+      FTB_LEGACYJAVAFIXER: "TRUE"
+#      ENABLE_AUTOPAUSE: "TRUE"
+      TZ: "Europe/Bratislava"
+      #ENABLE_RCON: "TRUE"
+      #RCON_PASSWORD: "mc-java-rcon-pass"
+      # RCON_PORT: 28016
+      # enable env variable replacement
+      REPLACE_ENV_VARIABLES: "TRUE"
+      # define an optional prefix for your env variables you want to replace
+      ENV_VARIABLE_PREFIX: "CFG_"
+      # and here are the actual variables
+      CFG_DB_HOST: "http://localhost:3306"
+      CFG_DB_NAME: "mc-java-theUltimate"
+      CFG_DB_USER: "mc-user"
+      CFG_DB_PASSWORD: "mc-pass"
+      # JAVA config
+      INIT_MEMORY: "128M"
+      MAX_MEMORY: "4G"
+      MEMORY: "128M"
+      #server.properties
+      # LEVEL_SEED: -895041041
+      GAMEMODE: survival
+      DIFFICULTY: "normal"
+#      OPS: "XXXXXX"
+      MAX_PLAYERS: 5
+      MAX_WORLD_SIZE: 1000000
+      SERVER_NAME: "Home - MC-Modded -the-Ultimate-pack"
+      MOTD: "Home - MC-Modded -the-Ultimate-pack"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true

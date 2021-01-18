@@ -1,0 +1,31 @@
+version: '3'
+services:
+  nextcloud:
+    image: linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/Bratislava
+    volumes:
+      - ./app-config:/config
+      - ./app-data:/data
+    ports:
+      - "8443:443"
+    restart: unless-stopped
+    depends_on:
+      - nextcloud_db
+  nextcloud_db:
+    image: linuxserver/mariadb
+    container_name: nextcloud_db
+    environment:
+      - PUID=1000
+      - PGID=100
+      - MYSQL_ROOT_PASSWORD=root_pass
+      - TZ=Europe/Bratislava
+      - MYSQL_DATABASE=nextcloud_db
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nexcloud_pass
+    volumes:
+      - ./db-data:/config
+    restart: unless-stopped

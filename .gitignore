@@ -1,0 +1,41 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!.gitkeep
+!*.conf
+!*.conf.back
+!*.conf.bak
+!default
+!*_params
+!mime.types
+!Dockerfile
+!*.yml
+!*.yaml
+!99*.ini
+!*.md
+!*.jar
+!*.dis
+!*.cfg
+!*.txt
+
+# etc...
+
+# ...even if they are in subdirectories
+!*/
+#
+## if the files to be tracked are in subdirectories
+#!*/a/b/file1.txt
+#!*/a/b/c/*
+#/asrock/etc/nginx/mime.types
+
+/mc-bedrock/data/*
+/mc-modded-the1.7.10pack/data/*
+/mc-modded-the1.12.2pack/data/*
+/mc-modded-theInfinity/data/*
+/mc-modded-theMythic/data/*
+/mc-modded-theMythicNovus/data/*
+/mc-modded-theUltimate/data/*
+/mc-vanilla-latest/data/*
+/mc-vanilla-snapshot/data/*

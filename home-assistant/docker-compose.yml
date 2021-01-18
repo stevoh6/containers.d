@@ -1,0 +1,14 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant
+    volumes:
+      - ./data:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Bratislava
+    restart: always
+    network_mode: host
+    ports:
+      - "8123:8123"

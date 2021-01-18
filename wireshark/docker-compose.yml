@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  wireshark:
+    image: ghcr.io/linuxserver/wireshark
+    container_name: wireshark
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/Bratislava
+    volumes:
+      - ./data:/config
+    ports:
+      - 3000:3000 #optional
+    restart: unless-stopped

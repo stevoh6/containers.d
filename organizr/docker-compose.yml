@@ -1,0 +1,17 @@
+---
+version: "2.1"
+services:
+  organizr:
+    image: organizr/organizr
+    container_name: organizr
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/Bratislava
+      - FPM=FALSE
+      - BRANCH=v2-master
+    volumes:
+      - "./data:/config"
+    ports:
+      - "4040:80"
+    restart: unless-stopped

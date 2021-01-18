@@ -1,0 +1,43 @@
+version: '3.5'
+services:
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./influxdb:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DATA_ENGINE=tsm1
+      - INFLUXDB_REPORTING_DISABLED=false
+      # - INFLUXDB_HTTP_AUTH_ENABLED=false
+      - INFLUXDB_ADMIN_USER=root
+      - INFLUXDB_ADMIN_USER_PASSWORD=root_pass
+      - INFLUXDB_USER=home_assistant
+      - INFLUXDB_USER_PASSWORD=home_assistant_pass
+      - INFLUXDB_DB=home_assistant
+    restart: always
+#    network_mode: host
+    networks:
+      - influxdb
+    ports:
+      - "8086:8086"
+      - "8083:8083"
+  chronograf:
+    container_name: chronograf
+    image: chronograf:latest
+    volumes:
+      - ./chronograf:/var/lib/chronograf
+    depends_on:
+      - influxdb
+    environment:
+      - INFLUXDB_URL=http://inbluxdb:8086
+      - INFLUXDB_USERNAME=root
+      - INFLUXDB_PASSWORD=root_pass
+    restart: unless-stopped
+#    network_mode: host
+    networks:
+      - influxdb
+    ports:
+      - "3002:8888"
+networks:
+  influxdb:
+    name: influxdb

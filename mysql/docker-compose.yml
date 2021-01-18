@@ -1,0 +1,18 @@
+version: '3.5'
+services:
+  mariadb:
+    container_name: maria-db
+    image: mariadb
+    volumes:
+      - ./conf.d:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+    restart: always
+    networks:
+      - mariadb
+    ports:
+      - "3306:3306"
+networks:
+  mariadb:
+    name: mariadb
